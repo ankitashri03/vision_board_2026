@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Vision Board</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            /* High Contrast Color Palette */
+            --bg-color: #020617;
+            --card-bg: rgba(15, 23, 42, 0.95); /* More opaque for better contrast */
+            --tile-bg: #1e293b; 
+            --accent-color: #38bdf8;
+            --text-main: #ffffff; /* Pure white for maximum contrast */
+            --text-dim: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.15);
+            --shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+            --bg-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop');
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            background-image: linear-gradient(rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.7)), var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-main);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 1.5rem 2rem;
+            border-radius: 1.25rem;
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            /* High-contrast gradient */
+            background: linear-gradient(135deg, #38bdf8, #818cf8, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary {
+            background: #38bdf8;
+            color: #020617;
+            box-shadow: 0 4px 14px 0 rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: #7dd3fc;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Board Grid Layout */
+        #vision-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .category-column {
+            background-color: var(--card-bg);
+            border-radius: 1.5rem;
+            padding: 1.75rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 450px;
+            box-shadow: var(--shadow);
+        }
+
+        .category-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #f1f5f9;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .category-desc {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+
+        .tile-list {
+            flex-grow: 1;
+            min-height: 100px;
+        }
+
+        .tile {
+            background-color: var(--tile-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            cursor: grab;
+            position: relative;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.4s ease-out;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .tile:hover {
+            transform: scale(1.03);
+            border-color: var(--accent-color);
+        }
+
+        .tile-content {
+            padding: 1.25rem;
+        }
+
+        .tile-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tile-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .delete-tile {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ef4444;
+            border: none;
+            color: white;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 10;
+            font-weight: bold;
+        }
+
+        .tile:hover .delete-tile {
+            opacity: 1;
+        }
+
+        /* Drag & Drop Styles */
+        .dragging {
+            opacity: 0.4;
+            transform: scale(0.95);
+        }
+
+        .drag-over {
+            background-color: rgba(56, 189, 248, 0.1);
+            border-style: dashed;
+            border-width: 2px;
+        }
+
+        /* Modal Styles */
+        #modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 6, 23, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(12px);
+        }
+
+        .modal {
+            background: #1e293b;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            width: 100%;
+            max-width: 550px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        select, textarea, input[type="file"] {
+            width: 100%;
+            padding: 1rem;
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            color: white;
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            h1 { font-size: 2rem; }
+            #vision-board { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>MANIFEST 2026</h1>
+        <div class="actions">
+            <button class="btn btn-secondary" onclick="exportBoard()">Save Board</button>
+            <button class="btn btn-primary" onclick="openModal()">+ Add Vision</button>
+        </div>
+    </header>
+
+    <div id="vision-board">
+        <!-- Generated Columns -->
+    </div>
+
+    <div id="modal-overlay" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <h2 style="margin-bottom: 1.5rem; font-weight: 900; font-size: 1.75rem;">Create Vision</h2>
+            
+            <div class="form-group">
+                <label for="category-select">Category</label>
+                <select id="category-select"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="vision-text">The Goal</label>
+                <textarea id="vision-text" placeholder="Be specific and bold..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="vision-image">Upload Visual Inspiration</label>
+                <input type="file" id="vision-image" accept="image/*">
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 1rem;">
+                <button class="btn btn-secondary" style="text-transform: none;" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" style="text-transform: none;" onclick="handleFormSubmission()">Add Vision</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const categoryData = [
+            {group: "Main", cat: "Travel & Adventure", desc: "Trips, exploration and new experiences"},
+            {group: "Main", cat: "Health & Fitness", desc: "Energy, strength and physical wellbeing"},
+            {group: "Main", cat: "Career & Work", desc: "Impact, achievements and big moves"},
+            {group: "Main", cat: "Money & Wealth", desc: "Abundance and financial freedom"},
+            {group: "Personal", cat: "Relationships & Love", desc: "Connection and shared joy"},
+            {group: "Personal", cat: "Personal Growth", desc: "Mindset and self discovery"},
+            {group: "Creative", cat: "Side Projects", desc: "Creation and entrepreneurship"},
+            {group: "Creative", cat: "Hobbies & Fun", desc: "Pure joy and entertainment"}
+        ];
+
+        const board = document.getElementById('vision-board');
+        const select = document.getElementById('category-select');
+        let draggedItem = null;
+
+        function init() {
+            categoryData.forEach((item, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = item.cat;
+                select.appendChild(option);
+
+                const col = document.createElement('div');
+                col.className = 'category-column';
+                col.dataset.id = index;
+                col.innerHTML = `
+                    <div class="category-header">
+                        <div class="category-title">${item.cat}</div>
+                        <div class="category-desc">${item.desc}</div>
+                    </div>
+                    <div class="tile-list" id="list-${index}"></div>
+                `;
+                
+                const list = col.querySelector('.tile-list');
+                list.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    list.classList.add('drag-over');
+                });
+                list.addEventListener('dragleave', () => list.classList.remove('drag-over'));
+                list.addEventListener('drop', e => {
+                    e.preventDefault();
+                    list.classList.remove('drag-over');
+                    if (draggedItem) {
+                        list.appendChild(draggedItem);
+                    }
+                });
+
+                board.appendChild(col);
+            });
+
+            // Starter inspiration
+            addVision(0, "Explore the Swiss Alps", null);
+            addVision(2, "Launch my creative portfolio", null);
+        }
+
+        function openModal() {
+            document.getElementById('modal-overlay').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').style.display = 'none';
+            document.getElementById('vision-text').value = '';
+            document.getElementById('vision-image').value = '';
+        }
+
+        function handleFormSubmission() {
+            const catIndex = select.value;
+            const text = document.getElementById('vision-text').value.trim();
+            const imageFile = document.getElementById('vision-image').files[0];
+
+            if (!text && !imageFile) return;
+
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    addVision(catIndex, text, e.target.result);
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                addVision(catIndex, text, null);
+            }
+        }
+
+        function addVision(catIndex, text, imageSrc) {
+            const list = document.getElementById(`list-${catIndex}`);
+            const tile = createTile(text, imageSrc);
+            list.appendChild(tile);
+            closeModal();
+        }
+
+        function createTile(text, imageSrc) {
+            const div = document.createElement('div');
+            div.className = 'tile';
+            div.draggable = true;
+
+            let html = `<button class="delete-tile" title="Delete">&times;</button>`;
+            if (imageSrc) html += `<img src="${imageSrc}" class="tile-img" alt="Vision Image">`;
+            if (text) html += `<div class="tile-content"><div class="tile-text">${text}</div></div>`;
+
+            div.innerHTML = html;
+            div.querySelector('.delete-tile').addEventListener('click', () => div.remove());
+
+            div.addEventListener('dragstart', () => {
+                draggedItem = div;
+                setTimeout(() => div.classList.add('dragging'), 0);
+            });
+            div.addEventListener('dragend', () => {
+                div.classList.remove('dragging');
+                draggedItem = null;
+            });
+
+            return div;
+        }
+
+        function exportBoard() {
+            const boardEl = document.getElementById('vision-board');
+            const deletes = document.querySelectorAll('.delete-tile');
+            
+            // Temporary styles for capture
+            deletes.forEach(d => d.style.display = 'none');
+            
+            html2canvas(document.body, {
+                scale: 2,
+                logging: false,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#020617'
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = '2026-Vision-Board.png';
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+                deletes.forEach(d => d.style.display = 'flex');
+            });
+        }
+
+        init();
+    </script>
+</body>
+</html>
