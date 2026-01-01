@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 Vision Board</title>
+    <title>2026 Vision Board - Morning Manifest</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
-            /* High Contrast Color Palette */
-            --bg-color: #020617;
-            --card-bg: rgba(15, 23, 42, 0.95); /* More opaque for better contrast */
-            --tile-bg: #1e293b; 
-            --accent-color: #38bdf8;
-            --text-main: #ffffff; /* Pure white for maximum contrast */
-            --text-dim: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.15);
-            --shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5);
-            --bg-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop');
+            /* Sunrise & Beach Color Palette */
+            --bg-color: #fefce8; /* Warm morning light */
+            --card-bg: rgba(255, 255, 255, 0.9); /* Opaque white for clarity */
+            --tile-bg: #ffffff; 
+            --accent-color: #ea580c; /* Sunrise orange */
+            --text-main: #431407; /* Deep mahogany for maximum contrast */
+            --text-dim: #92400e;
+            --border-color: rgba(234, 88, 12, 0.2);
+            --shadow: 0 10px 25px -5px rgba(67, 20, 7, 0.2);
+            /* Beach morning vibes background from Unsplash */
+            --bg-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop');
         }
 
         * {
@@ -28,7 +29,8 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
-            background-image: linear-gradient(rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.7)), var(--bg-image);
+            /* Soft morning glow gradient over the beach image */
+            background-image: linear-gradient(rgba(255, 247, 237, 0.4), rgba(255, 237, 213, 0.4)), var(--bg-image);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -44,11 +46,11 @@
             margin-bottom: 2.5rem;
             flex-wrap: wrap;
             gap: 1rem;
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(255, 255, 255, 0.7);
             padding: 1.5rem 2rem;
             border-radius: 1.25rem;
             backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: var(--shadow);
         }
 
@@ -56,11 +58,11 @@
             font-size: 2.5rem;
             font-weight: 900;
             letter-spacing: -0.04em;
-            /* High-contrast gradient */
-            background: linear-gradient(135deg, #38bdf8, #818cf8, #fbbf24);
+            /* High-contrast manifest gradient */
+            background: linear-gradient(135deg, #ea580c, #f59e0b, #be185d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
         .actions {
@@ -84,24 +86,24 @@
         }
 
         .btn-primary {
-            background: #38bdf8;
-            color: #020617;
-            box-shadow: 0 4px 14px 0 rgba(56, 189, 248, 0.4);
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            color: #ffffff;
+            box-shadow: 0 4px 14px 0 rgba(234, 88, 12, 0.4);
         }
 
         .btn-primary:hover {
-            background-color: #7dd3fc;
+            filter: brightness(1.1);
             transform: translateY(-2px);
         }
 
         .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.5);
+            color: var(--text-main);
+            border: 1px solid rgba(234, 88, 12, 0.3);
         }
 
         .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 255, 255, 0.8);
         }
 
         /* Board Grid Layout */
@@ -116,11 +118,12 @@
             background-color: var(--card-bg);
             border-radius: 1.5rem;
             padding: 1.75rem;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(234, 88, 12, 0.1);
             display: flex;
             flex-direction: column;
             min-height: 450px;
             box-shadow: var(--shadow);
+            backdrop-filter: blur(4px);
         }
 
         .category-header {
@@ -132,7 +135,7 @@
         .category-title {
             font-size: 1.25rem;
             font-weight: 800;
-            color: #f1f5f9;
+            color: #7c2d12;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
@@ -142,6 +145,7 @@
             color: var(--text-dim);
             margin-top: 8px;
             line-height: 1.4;
+            font-weight: 500;
         }
 
         .tile-list {
@@ -151,12 +155,12 @@
 
         .tile {
             background-color: var(--tile-bg);
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(234, 88, 12, 0.1);
             border-radius: 1rem;
             margin-bottom: 1.5rem;
             cursor: grab;
             position: relative;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 12px rgba(67, 20, 7, 0.1);
             animation: fadeIn 0.4s ease-out;
             overflow: hidden;
             transition: transform 0.2s ease, border-color 0.2s ease;
@@ -165,6 +169,7 @@
         .tile:hover {
             transform: scale(1.03);
             border-color: var(--accent-color);
+            box-shadow: 0 8px 16px rgba(67, 20, 7, 0.15);
         }
 
         .tile-content {
@@ -182,8 +187,8 @@
         .tile-text {
             font-size: 1rem;
             line-height: 1.6;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 700;
+            color: var(--text-main); /* High contrast dark text on white tile */
         }
 
         .delete-tile {
@@ -203,7 +208,6 @@
             opacity: 0;
             transition: opacity 0.2s;
             z-index: 10;
-            font-weight: bold;
         }
 
         .tile:hover .delete-tile {
@@ -217,7 +221,7 @@
         }
 
         .drag-over {
-            background-color: rgba(56, 189, 248, 0.1);
+            background-color: rgba(234, 88, 12, 0.05);
             border-style: dashed;
             border-width: 2px;
         }
@@ -229,22 +233,22 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(2, 6, 23, 0.9);
+            background: rgba(67, 20, 7, 0.4);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(8px);
         }
 
         .modal {
-            background: #1e293b;
+            background: #ffffff;
             padding: 2.5rem;
             border-radius: 1.5rem;
             width: 100%;
             max-width: 550px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 25px 50px -12px rgba(67, 20, 7, 0.3);
         }
 
         .form-group {
@@ -263,10 +267,10 @@
         select, textarea, input[type="file"] {
             width: 100%;
             padding: 1rem;
-            background: #0f172a;
+            background: #fffaf0;
             border: 1px solid var(--border-color);
             border-radius: 0.75rem;
-            color: white;
+            color: var(--text-main);
             font-family: inherit;
         }
 
@@ -293,7 +297,7 @@
         <h1>MANIFEST 2026</h1>
         <div class="actions">
             <button class="btn btn-secondary" onclick="exportBoard()">Save Board</button>
-            <button class="btn btn-primary" onclick="openModal()">+ Add Vision</button>
+            <button class="btn btn-primary" onclick="openModal()">+ New Vision</button>
         </div>
     </header>
 
@@ -303,7 +307,7 @@
 
     <div id="modal-overlay" onclick="closeModal(event)">
         <div class="modal" onclick="event.stopPropagation()">
-            <h2 style="margin-bottom: 1.5rem; font-weight: 900; font-size: 1.75rem;">Create Vision</h2>
+            <h2 style="margin-bottom: 1.5rem; font-weight: 900; font-size: 1.75rem; color: #431407;">Manifest 2026</h2>
             
             <div class="form-group">
                 <label for="category-select">Category</label>
@@ -311,7 +315,7 @@
             </div>
 
             <div class="form-group">
-                <label for="vision-text">The Goal</label>
+                <label for="vision-text">The Dream</label>
                 <textarea id="vision-text" placeholder="Be specific and bold..."></textarea>
             </div>
 
@@ -379,8 +383,8 @@
             });
 
             // Starter inspiration
-            addVision(0, "Explore the Swiss Alps", null);
-            addVision(2, "Launch my creative portfolio", null);
+            addVision(0, "Morning yoga by the ocean", null);
+            addVision(1, "Daily beach run at dawn", null);
         }
 
         function openModal() {
@@ -454,10 +458,10 @@
                 logging: false,
                 useCORS: true,
                 allowTaint: true,
-                backgroundColor: '#020617'
+                backgroundColor: '#fefce8'
             }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = '2026-Vision-Board.png';
+                link.download = '2026-Manifest-Vision-Board.png';
                 link.href = canvas.toDataURL("image/png");
                 link.click();
                 deletes.forEach(d => d.style.display = 'flex');
